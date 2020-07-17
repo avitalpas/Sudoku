@@ -1,92 +1,64 @@
+var userName;
+var curLevel = "easy";
+
 // =================== login scripts ===================
 
-let NumberOfUsers = 0;
-let MaxNumberOfUsers = 4;
-
-// Constructor function for User objects
-function Person(name, pswd) {
-    this.name = name;
-    this.pswd = pswd;
-}
-
-// Create Person objects
-var projAdmin = new Person("abcd", "1234");
-var user1 = new Person("Sara", "1111");
-var user2 = new Person("Avital", "2222");
-var user3 = new Person("Oded", "3333");
-
-var UsersList = [];
-
-function setUsers(user) {
-    UsersList[NumberOfUsers++] = user;
-}
-
-// for(let i = NumberOfUsers; i < MaxNumberOfUsers; i++)
-// initialize users
-function TemporarySet() {
-    setUsers(projAdmin);
-    setUsers(user1);
-    setUsers(user2);
-    setUsers(user3);
-}
-
+var users = [
+    {
+        username: 'abcd',
+        password: '1234'
+    }
+]
 // validate username & password then proceed to level screen
 function checkUser() {
-    TemporarySet();
-    let userName = document.getElementById('userName').value;
-    let userPswd = document.getElementById('Password').value;
-    for (let currUser of UsersList) {
-        if (currUser.name == userName) { // check if existe user name 
-            if (currUser.pswd == userPswd) {  // check if password is correct for chosen user 
-                console.log("got login:\nuser - " + currUser.name + '\npassword - ' + currUser.pswd);
 
-                // hide login page
-                document.getElementById("loginContainer").hidden = true;
+    // get input values
+    userName = document.getElementById('userName').value;
+    let password = document.getElementById('Password').value;
 
-                // show levels page
-                document.getElementById("levelContainer").hidden = false;
-
-                // call level function
-                setupLevelPage();
-
-                // end function
-                return;
-            }
-            else {
-                if (NumberOfTries++ < 3) { // extra try for insert password
-                    alert(" The password is incorrect! Try Again.");
-                    // Password.style.border = "1px solid red";
-                    // document.getElementById('Password').style.color = "red";
-                    // document.getElementById('Password').value = '';
-                    console.log(NumberOfTries);
-                    return;
+    // if empty = login as guest
+    if( userName == '' ) {
+        userName = 'Guest';
+        setupLevelPage()
+    }
+    
+    // if not guest, check if exists
+    else{
+        for( let i = 0; i < users.length; i++){
+            if( users[i].username == userName ){
+                if( users[i].password == password ){
+                    setupLevelPage()
                 }
-                else {
-                    NumberOfTries = 0;
-                    alert(" Press: Forget your Password");
-                    return;
-                }
-
+                else alert('Wrong password !')
             }
+            else alert("User don't exist")
         }
     }
-    alert("The User Name is incorrect! Try Again");  // if not existing user name in list of users
-    return;
 }
 
 // =================== level scripts ===================
 
-var userName;
-var curLevel = "easy";
+// show login page
+function backToLogin(){
+    // hide login form
+    document.querySelector('#loginContainer').hidden = false;
+
+    // show levels window
+    document.querySelector('#levelContainer').hidden = true;
+}
 
 // print username
 function setupLevelPage() {
 
-    // get userName
-    userName = document.getElementById("userName").value;
-
     // add userName to welcome header
-    document.getElementById("welcomeHeader").innerHTML += " " + userName;
+    document.querySelector('.levelContainer h3').innerHTML += " " + userName;
+
+    // hide login form
+    document.querySelector('#loginContainer').hidden = true;
+
+    // show levels window
+    document.querySelector('#levelContainer').hidden = false;
+
 }
 
 // initilize game level chosen and proceed to game
@@ -254,15 +226,40 @@ function printGame(gamePart){
     // variables
     var randomIndex, cellsCount = 0, row, col;
 
-    // reset matrix & table 
-    resetGameBoard();
-
     // get random board
     randomIndex = getRandomInt( 0, sudokuTabels.length )
     randomBoard = sudokuTabels[randomIndex];
     console.log("Random board index: " + randomIndex);
     console.log(randomBoard);
+
+    // create HTML table
+    var tableHtml = document.createElement('tbody');
+    console.log(tableHtml)
+    for( let row = 0; row < 9; row++){
+
+        var rowHtml = document.createElement('tr')
+
+        for( let col = 0; col < 9; col++ ){
+            var tdHtml = document.createElement('td')
+            var inputHtml = document.createElement('input')
+            inputHtml.setAttribute('data-row', row)
+            inputHtml.setAttribute('data-col', col)
+            inputHtml.setAttribute('type', 'number')
+            inputHtml.setAttribute('min', '1')
+            inputHtml.setAttribute('max', '9')
+            
+            tdHtml.appendChild(inputHtml)
+            rowHtml.appendChild(tdHtml)
+        }
+
+        tableHtml.appendChild(rowHtml)
+    }
+    console.log(tableHtml)
+
+    document.querySelector('#mainTable').appendChild(tableHtml)
     
+    // reset matrix & table 
+    resetGameBoard();
 
     // while cellCount < total cells needed to print, continue printing
     do{
