@@ -200,6 +200,7 @@ input:focus {
 
 input:disabled{
     color: white;
+    background-color: #4B606B;
 }
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
