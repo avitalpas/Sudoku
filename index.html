@@ -7,6 +7,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/8df69b0d87.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style550.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' href='favicon.ico'>
     <title>Sudoku</title>
@@ -39,9 +40,11 @@
 
     <!-- level containter -->
     <div id="levelContainer" class="levelContainer" hidden>
+
         <button onclick="backToLogin()"><</button>
         <h3>Welcome</h3>
         <p>Choose level difficulty</p>
+
         <div class='levelButtons'>
             <button id="easy" onclick="setLevel('easy')">Easy</button>
             <button id="medium" onclick="setLevel('medium')">Medium</button>
@@ -53,7 +56,7 @@
     <!-- game page -->
     <div id="gameContainer" hidden>
 
-        <button onclick="changeLevel()"><</button>
+        <p class='backButton' title='Back to levels' onclick="changeLevel()"><</p>
 
         <!-- Header -->
         <h1 id="gameHeader" class="headers">Good Luck</h1>
@@ -61,7 +64,6 @@
         <!-- Gameboard -->
         <div id="gameBoard">
             <table id="mainTable">
-                
             </table>
         </div>
 
@@ -69,12 +71,13 @@
         <div class="infoLine">
             <p id="infoDifficulty">Difficulty: </p>
         </div>
+
         <!-- Buttons -->
         <div id="gameButtons">
-            <span onclick="finisheGame()">Finish</span>
-            <span onclick="deleteUserInput()">Again</span>
-            <span onclick="solveGame()">Solve</span>
-            <span onclick="generateSudoku()">New game</span>
+            <p onclick="finisheGame()">Finish</p>
+            <p onclick="deleteUserInput()">Again</p>
+            <p onclick="solveGame()">Solve</p>
+            <p onclick="generateSudoku()">New game</p>
         </div>
     </div>
 

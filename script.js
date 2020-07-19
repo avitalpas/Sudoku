@@ -232,31 +232,39 @@ function printGame(gamePart){
     console.log("Random board index: " + randomIndex);
     console.log(randomBoard);
 
-    // create HTML table
-    var tableHtml = document.createElement('tbody');
-    console.log(tableHtml)
-    for( let row = 0; row < 9; row++){
+    if( document.querySelector('tbody') == null ){
+        console.log('No table yet')
 
-        var rowHtml = document.createElement('tr')
+        // create HTML table
+        var tableHtml = document.createElement('tbody');
+        console.log(tableHtml)
+        for( let row = 0; row < 9; row++){
 
-        for( let col = 0; col < 9; col++ ){
-            var tdHtml = document.createElement('td')
-            var inputHtml = document.createElement('input')
-            inputHtml.setAttribute('data-row', row)
-            inputHtml.setAttribute('data-col', col)
-            inputHtml.setAttribute('type', 'number')
-            inputHtml.setAttribute('min', '1')
-            inputHtml.setAttribute('max', '9')
-            
-            tdHtml.appendChild(inputHtml)
-            rowHtml.appendChild(tdHtml)
+            var rowHtml = document.createElement('tr')
+
+            for( let col = 0; col < 9; col++ ){
+                var tdHtml = document.createElement('td')
+                var inputHtml = document.createElement('input')
+                inputHtml.setAttribute('data-row', row)
+                inputHtml.setAttribute('data-col', col)
+                inputHtml.setAttribute('type', 'number')
+                inputHtml.setAttribute('min', '1')
+                inputHtml.setAttribute('max', '9')
+                
+                tdHtml.appendChild(inputHtml)
+                rowHtml.appendChild(tdHtml)
+            }
+
+            tableHtml.appendChild(rowHtml)
         }
+        console.log(tableHtml)
 
-        tableHtml.appendChild(rowHtml)
+        document.querySelector('#mainTable').appendChild(tableHtml)
     }
-    console.log(tableHtml)
-
-    document.querySelector('#mainTable').appendChild(tableHtml)
+    else{
+        console.log('Tabe already exists')
+    }
+    
     
     // reset matrix & table 
     resetGameBoard();

@@ -212,28 +212,50 @@ input[type="number"] {
 }
 
 /* ==================== Buttons ==================== */
-.gameContainer{
+#gameContainer{
     text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-#gameButtons span,
-#gameButtons input{
-    margin: 15px;
-    padding: 7px;
-    border: 3px solid #5b9bd5;
-    border-radius: 7px;
-    color: rgb(56, 56, 56);
-    font-size: 17px;
-    font-weight: 500;
-    width: fit-content;
-    height: fit-content;
-    max-width: 200px;
-}
-
-#gameButtons span:hover,
-#gameButtons input:hover{
-    background-color: #5b9bd5;
+.backButton{
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.637);
+    color: #052232;
+    border-radius: 3px;
+    width: max-content;
+    padding: 3px 10px;
     cursor: pointer;
+    transition: .3s;
+}
+
+.backButton:hover{
+    filter: opacity(70%);
+}
+
+#gameContainer h1{
+    text-align: center;
+}
+
+#gameButtons{
+    text-align: center;
+}
+
+#gameButtons p{
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.637);
+    color: #052232;
+    border-radius: 3px;
+    width: max-content;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: .3s;
+    display: inline-block;
+    margin: 15px;
+}
+
+#gameButtons p:hover{
+    filter: opacity(70%);
 }
 
